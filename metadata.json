@@ -1,0 +1,6 @@
+{
+  "name": "成語拼圖遊戲",
+  "description": "一款老少咸宜、適合全家、學生、成人與長者的成語拼字填空益智遊戲。包含10個由淺入深的漸進式一般關卡與90秒無限答題挑戰賽，文字配置大氣清晰、觸控友善，適合學習與動腦比拼！",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

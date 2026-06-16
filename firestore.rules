@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny catch-all security net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions for Fortress Rules
+    function isValidId(id) {
+      return id is string && id.size() <= 64 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    // User profiles matching pseudonymous local unique IDs
+    match /users/{userId} {
+      allow read, list: if true;
+      allow create, update: if isValidId(userId) 
+        && incoming().id == userId
+        && incoming().name is string 
+        && incoming().name.size() > 0 
+        && incoming().name.size() <= 32;
+    }
+
+    // Level records
+    match /level_records/{recordId} {
+      allow read, list: if true;
+      allow create, update: if isValidId(recordId)
+        && incoming().levelId is string
+        && incoming().userId is string
+        && incoming().userName is string
+        && incoming().seconds is number
+        && incoming().seconds > 0;
+    }
+
+    // Challenge leaderboard
+    match /challenge_leaderboard/{recordId} {
+      allow read, list: if true;
+      allow create, update: if isValidId(recordId)
+        && incoming().userId is string
+        && incoming().userName is string
+        && (
+          (incoming().score is number && incoming().score >= 0)
+          || (incoming().secondsSpent is number && incoming().secondsSpent > 0)
+        );
+    }
+  }
+}

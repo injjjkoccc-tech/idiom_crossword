@@ -1,0 +1,93 @@
+{
+  "entities": {
+    "user": {
+      "title": "User Profile",
+      "description": "Public profile stored upon registration",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique user ID generated locally"
+        },
+        "name": {
+          "type": "string",
+          "description": "Selected player nickname"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of player creation"
+        }
+      },
+      "required": ["id", "name", "createdAt"]
+    },
+    "levelRecord": {
+      "title": "Level Completion Record",
+      "description": "Earliest record of fastest completion for each general level",
+      "type": "object",
+      "properties": {
+        "levelId": {
+          "type": "string",
+          "description": "Identifier of the level (e.g., level_1)"
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID of the record holder"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Cached user nickname of the record holder"
+        },
+        "seconds": {
+          "type": "number",
+          "description": "Duration spent in seconds to complete"
+        },
+        "achievedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the achievement"
+        }
+      },
+      "required": ["levelId", "userId", "userName", "seconds", "achievedAt"]
+    },
+    "challengeRecord": {
+      "title": "Challenge Leaderboard Record",
+      "description": "Clear time record in crossword challenge mode under 60s",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User ID of the player"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Cached player nickname"
+        },
+        "secondsSpent": {
+          "type": "number",
+          "description": "Time spent in seconds to clear grid"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of completion"
+        }
+      },
+      "required": ["userId", "userName", "secondsSpent", "completedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "Access to public user names"
+    },
+    "/level_records/{recordId}": {
+      "schema": "levelRecord",
+      "description": "Read and write level records"
+    },
+    "/challenge_leaderboard/{recordId}": {
+      "schema": "challengeRecord",
+      "description": "Read and write challenge leaderboard scores"
+    }
+  }
+}
