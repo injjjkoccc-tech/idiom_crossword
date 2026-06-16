@@ -369,7 +369,7 @@ export const IDIOM_BANK: Idiom[] = [
   { text: "聚精會神", missingIndex: 3, missingChar: "神", hint: "把所有的精神跟注力都集中在一起。形容聽極其專心。" },
   { text: "全神貫注", missingIndex: 3, missingChar: "注", hint: "精神思想高度集中。形容學習、辦事十分認真。" },
   { text: "認認真真", missingIndex: 3, missingChar: "真", hint: "做事情一絲不苟、毫不馬虎，態度極其端正端正。" },
-  { text: "一絲不苟", missingIndex: 3, missingChar: "苟", hint: "做事情 extremely 細心，連最微小的細節都不放過。" },
+  { text: "一絲不苟", missingIndex: 3, missingChar: "苟", hint: "做事情極為細心，連最微小的細節都不放過。" },
   { text: "小心翼翼", missingIndex: 3, missingChar: "翼", hint: "形容舉止特別謹慎細心，生怕出了一點點差錯錯。" },
   { text: "如履薄冰", missingIndex: 3, missingChar: "冰", hint: "就像走在薄冰上。比喻面臨十分危險，辦事極其謹慎。" },
   { text: "戰戰兢兢", missingIndex: 3, missingChar: "兢", hint: "形容因極度驚恐或十分謹慎而發抖，做事情極小心。" },
