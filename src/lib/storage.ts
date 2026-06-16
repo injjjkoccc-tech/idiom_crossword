@@ -31,7 +31,29 @@ const DEFAULT_CHALLENGE_RECORDS: ChallengeRecord[] = [];
 let isFirebaseActive = false;
 let db: any = null;
 
-const config = (firebaseConfig as any)?.default || firebaseConfig;
+// Read config from Vite environment variables (useful for public hosting like Render)
+const metaEnv = (import.meta as any).env || {};
+const envConfig = {
+  projectId: metaEnv.VITE_FIREBASE_PROJECT_ID,
+  appId: metaEnv.VITE_FIREBASE_APP_ID,
+  apiKey: metaEnv.VITE_FIREBASE_API_KEY,
+  authDomain: metaEnv.VITE_FIREBASE_AUTH_DOMAIN,
+  firestoreDatabaseId: metaEnv.VITE_FIREBASE_DATABASE_ID,
+  storageBucket: metaEnv.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: metaEnv.VITE_FIREBASE_MESSAGING_SENDER_ID,
+};
+
+const fileConfig = (firebaseConfig as any)?.default || firebaseConfig || {};
+
+const config = {
+  projectId: envConfig.projectId || fileConfig.projectId,
+  appId: envConfig.appId || fileConfig.appId,
+  apiKey: envConfig.apiKey || fileConfig.apiKey,
+  authDomain: envConfig.authDomain || fileConfig.authDomain,
+  firestoreDatabaseId: envConfig.firestoreDatabaseId || fileConfig.firestoreDatabaseId,
+  storageBucket: envConfig.storageBucket || fileConfig.storageBucket,
+  messagingSenderId: envConfig.messagingSenderId || fileConfig.messagingSenderId,
+};
 
 if (config && config.apiKey && config.projectId) {
   try {
